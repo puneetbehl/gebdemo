@@ -62,6 +62,7 @@ dependencies {
     testImplementation("org.seleniumhq.selenium:selenium-support:4.10.0")
     testImplementation("org.spockframework:spock-core")
     testRuntimeOnly("org.seleniumhq.selenium:selenium-chrome-driver:4.10.0")
+    testRuntimeOnly("org.seleniumhq.selenium:selenium-firefox-driver:4.10.0")
     testImplementation("io.micronaut:micronaut-http-client")
 
 }
@@ -78,7 +79,6 @@ tasks.withType(Test) {
     useJUnitPlatform()
     systemProperty "geb.env", System.getProperty('geb.env')
     systemProperty "geb.build.reportsDir", reporting.file("geb/integrationTest")
-
     if (!System.getenv().containsKey('CI')) {
         systemProperty 'webdriver.chrome.driver', System.getProperty('webdriver.chrome.driver')
         systemProperty 'webdriver.gecko.driver', System.getProperty('webdriver.gecko.driver')
