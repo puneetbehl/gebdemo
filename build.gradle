@@ -79,14 +79,21 @@ tasks.withType(Test) {
     useJUnitPlatform()
     systemProperty "geb.env", System.getProperty('geb.env')
     systemProperty "geb.build.reportsDir", reporting.file("geb/integrationTest")
-    systemProperty 'webdriver.chrome.driver', "${System.getenv('CHROMEWEBDRIVER')}/chromedriver"
-    systemProperty 'webdriver.gecko.driver', "${System.getenv('GECKOWEBDRIVER')}/geckodriver"
+    if (!System.getenv().containsKey('CI')) {
+        systemProperty 'webdriver.chrome.driver', System.getProperty('webdriver.chrome.driver')
+        systemProperty 'webdriver.gecko.driver', System.getProperty('webdriver.gecko.driver')
+    } else {
+        systemProperty 'webdriver.chrome.driver', "${System.getenv('CHROMEWEBDRIVER')}/chromedriver"
+        systemProperty 'webdriver.gecko.driver', "${System.getenv('GECKOWEBDRIVER')}/geckodriver"
+    }
 }
 
 webdriverBinaries {
-    chromedriver '110.0.5481.77'
-    geckodriver '0.32.2'
-    edgedriver '110.0.1587.57'
+    if (!System.getenv().containsKey('CI')) {
+        chromedriver '110.0.5481.77'
+        geckodriver '0.32.2'
+        edgedriver '110.0.1587.57'
+    }
 }
 assets {
     minifyJs = true
