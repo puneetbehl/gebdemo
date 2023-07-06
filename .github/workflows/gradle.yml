@@ -24,7 +24,7 @@ jobs:
         id: build
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: build
+          arguments: build -Dgeb.env=chromeHeadless --stacktrace
       - name: Publish Test Report
         if: steps.build.outcome == 'failure' || steps.tests.outcome == 'failure'
         uses: scacap/action-surefire-report@v1
