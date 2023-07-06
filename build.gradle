@@ -21,7 +21,7 @@ repositories {
 configurations {
     all {
         resolutionStrategy.force 'org.codehaus.groovy:groovy-xml:3.0.13'
-        resolutionStrategy.eachDependency {DependencyResolveDetails details->
+        resolutionStrategy.eachDependency { DependencyResolveDetails details->
             if (details.requested.group == 'org.seleniumhq.selenium') {
                 details.useVersion('4.10.0')
             }
