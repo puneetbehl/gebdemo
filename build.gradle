@@ -21,7 +21,13 @@ repositories {
 configurations {
     all {
         resolutionStrategy.force 'org.codehaus.groovy:groovy-xml:3.0.13'
+        resolutionStrategy.eachDependency {DependencyResolveDetails details->
+            if (details.requested.group == 'org.seleniumhq.selenium') {
+                details.useVersion('4.10.0')
+            }
+        }
     }
+
 }
 
 dependencies {
@@ -63,6 +69,7 @@ dependencies {
     testImplementation("org.spockframework:spock-core")
     testRuntimeOnly("org.seleniumhq.selenium:selenium-chrome-driver:4.10.0")
     testRuntimeOnly("org.seleniumhq.selenium:selenium-firefox-driver:4.10.0")
+    testRuntimeOnly("org.seleniumhq.selenium:selenium-safari-driver:4.10.0")
     testImplementation("io.micronaut:micronaut-http-client")
 
 }
